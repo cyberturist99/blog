@@ -87,7 +87,7 @@ const Post: React.FC<PostProps> = ({ article }) => {
             <img
               className={styles.like}
               onClick={markTheArticle}
-              src={isLiked ? likedHeart : unlikedHeart}
+              src={isLiked && isLoggedIn ? likedHeart : unlikedHeart}
               alt="likes"
             />
             <span className={styles['likes-count']}>{count}</span>
