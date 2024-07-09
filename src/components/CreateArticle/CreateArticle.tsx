@@ -200,12 +200,10 @@ const CreateArticle: React.FC = () => {
           type="text"
           defaultValue={slug ? article?.title : ''}
           placeholder="Title"
-          {...register('title', { required: true })}
+          {...register('title', { required: true, validate: (value) => value.trim() !== '' })}
           style={{ borderColor: errors.title ? 'rgba(245, 34, 45, 1)' : 'rgb(217, 217, 217)' }}
         />
-        {errors.title && errors.title.type === 'required' && (
-          <span className={styles['error-message']}>title is required</span>
-        )}
+        {errors['title'] && <span className={styles['error-message']}>title is required</span>}
       </label>
 
       <label className={styles.label}>
@@ -215,13 +213,13 @@ const CreateArticle: React.FC = () => {
           type="text"
           placeholder="Title"
           defaultValue={slug ? article?.description : ''}
-          {...register('description', { required: true })}
+          {...register('description', { required: true, validate: (value) => value.trim() !== '' })}
           style={{
             borderColor: errors.description ? 'rgba(245, 34, 45, 1)' : 'rgb(217, 217, 217)'
           }}
         />
-        {errors.description && errors.description.type === 'required' && (
-          <span className={styles['error-message']}>short description is required</span>
+        {errors['description'] && (
+          <span className={styles['error-message']}>description is required</span>
         )}
       </label>
 
@@ -230,15 +228,13 @@ const CreateArticle: React.FC = () => {
         <textarea
           className={styles['body-input']}
           placeholder="Text"
-          {...register('body', { required: true })}
+          {...register('body', { required: true, validate: (value) => value.trim() !== '' })}
           defaultValue={slug ? article?.body : ''}
           style={{
             borderColor: errors.body ? 'rgba(245, 34, 45, 1)' : 'rgb(217, 217, 217)'
           }}
         />
-        {errors.body && errors.body.type === 'required' && (
-          <span className={styles['error-message']}>text is required</span>
-        )}
+        {errors['body'] && <span className={styles['error-message']}>text is required</span>}
       </label>
 
       <label className={styles.label}>

@@ -14,6 +14,13 @@ const Postlist: React.FC = () => {
   const [isLoading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
+    const savedPage = localStorage.getItem('currentPage');
+    if (savedPage) {
+      setPage(JSON.parse(savedPage));
+
+      dispatch(fetchArticles(JSON.parse(savedPage)));
+    }
+
     dispatch(fetchArticles(page)).then(() => {
       setLoading(false);
     });
@@ -21,6 +28,8 @@ const Postlist: React.FC = () => {
 
   const changePage = (pageNumber: number) => {
     const newPage = (pageNumber - 1) * 5;
+    localStorage.setItem('currentPage', JSON.stringify(newPage));
+
     setPage(newPage);
   };
 
@@ -37,7 +46,12 @@ const Postlist: React.FC = () => {
           return <Post key={article.slug} article={article} />;
         })}
       </ul>
-      <Pagination className={styles.pagination} total={50} onChange={changePage} />
+      <Pagination
+        className={styles.pagination}
+        total={50}
+        onChange={changePage}
+        current={page / 5 + 1}
+      />
     </>
   ) : null;
 };

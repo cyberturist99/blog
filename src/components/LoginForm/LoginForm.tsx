@@ -79,12 +79,9 @@ const LoginForm: React.FC = () => {
         {errors.password && errors.password.type === 'required' && (
           <span className={styles['error-message']}>Password is required</span>
         )}
-        {typeof serverErrors === 'object' &&
-          serverErrors !== null &&
-          serverErrors.errors &&
-          serverErrors.errors.username && (
-            <span className={styles['error-message']}>email or password is invalid</span>
-          )}
+        {typeof serverErrors === 'object' && serverErrors !== null && serverErrors.errors && (
+          <span className={styles['error-message']}>email or password is invalid</span>
+        )}
       </label>
 
       <div className={styles['sign-up']}>

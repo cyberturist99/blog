@@ -45,8 +45,8 @@
     text-decoration: none;
   }
   .button-create-article:hover {
-    color: lighten(rgba(82, 196, 26), 15%);
-    border: 1px solid lighten(rgba(82, 196, 26), 15%);
+    color: white;
+    background-color: rgba(82, 196, 26, 1);
   }
   .edit-profile {
     display: flex;
