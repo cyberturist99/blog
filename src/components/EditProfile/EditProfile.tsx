@@ -32,8 +32,8 @@ const EditProfile: React.FC = () => {
     formState: { errors }
   } = useForm<editProfile>({
     defaultValues: {
-      username: username,
-      email: email
+      username,
+      email
     }
   });
 

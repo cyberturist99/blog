@@ -50,8 +50,27 @@ const CreateArticle: React.FC = () => {
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors }
-  } = useForm<Iarticle>();
+  } = useForm<Iarticle>({
+    defaultValues: {
+      title: article?.title,
+      description: article?.description,
+      body: article?.body,
+      tagList: article?.tagList
+    }
+  });
+
+  useEffect(() => {
+    if (article) {
+      reset({
+        title: article.title,
+        description: article.description,
+        body: article.body,
+        tagList: article.tagList
+      });
+    }
+  }, [article]);
 
   const handleAddTag = () => {
     if (tags[tags.length - 1]) {
@@ -198,7 +217,6 @@ const CreateArticle: React.FC = () => {
         <input
           className={styles['label__input']}
           type="text"
-          defaultValue={slug ? article?.title : ''}
           placeholder="Title"
           {...register('title', { required: true, validate: (value) => value.trim() !== '' })}
           style={{ borderColor: errors.title ? 'rgba(245, 34, 45, 1)' : 'rgb(217, 217, 217)' }}
@@ -212,7 +230,6 @@ const CreateArticle: React.FC = () => {
           className={styles['label__input']}
           type="text"
           placeholder="Title"
-          defaultValue={slug ? article?.description : ''}
           {...register('description', { required: true, validate: (value) => value.trim() !== '' })}
           style={{
             borderColor: errors.description ? 'rgba(245, 34, 45, 1)' : 'rgb(217, 217, 217)'
@@ -229,7 +246,6 @@ const CreateArticle: React.FC = () => {
           className={styles['body-input']}
           placeholder="Text"
           {...register('body', { required: true, validate: (value) => value.trim() !== '' })}
-          defaultValue={slug ? article?.body : ''}
           style={{
             borderColor: errors.body ? 'rgba(245, 34, 45, 1)' : 'rgb(217, 217, 217)'
           }}
